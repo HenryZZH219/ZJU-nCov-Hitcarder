@@ -232,13 +232,21 @@ if __name__ == "__main__":
     if dingtalk_token:
         ret = message.dingtalk(msg, dingtalk_token)
         print('send_dingtalk_message', ret)
+        
+        
+    username = os.environ['USERNAME2']
+    password = os.environ['PASSWORD2']
 
-    serverchan_key = os.environ.get('SERVERCHAN_KEY')
-    if serverchan_key:
-        ret = message.serverchan(msg, '', serverchan_key)
-        print('send_serverChan_message', ret)
+    ret, msg = main(username, password)
+    print(ret, msg)
+    if ret == 1:
+        time.sleep(5)
+        ret, msg = main(username, password)
+        print(ret, msg)
 
-    pushplus_token = os.environ.get('PUSHPLUS_TOKEN')
-    if pushplus_token:
-        print('pushplus服务已下线，建议使用钉钉')
-        exit(-1)
+    dingtalk_token = os.environ.get('DINGTALK_TOKEN2')
+    if dingtalk_token:
+        ret = message.dingtalk(msg, dingtalk_token)
+        print('send_dingtalk_message', ret)
+
+
